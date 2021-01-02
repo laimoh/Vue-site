@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,500;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+   margin: 0;
+   padding: 0;
+}
+
+:root {
+   --main-border-color: linear-gradient(90deg,
+         rgba(73, 58, 180, 1) 0%,
+         rgba(29, 253, 166, 1) 50%,
+         rgba(252, 138, 69, 1) 100%);
+   --main-bg-color: rgb(223, 223, 223);
+   /* --reverse-border-color: linear-gradient(180deg, rgba(73, 58, 180, 1) 0%, rgba(29, 253, 166, 1) 50%, rgba(252, 138, 69, 1) 100%); */
+   --main-text-color: rgb(70, 47, 219);
+   /* --secondary-text-color: rgb(77, 99, 24); */
+   --secondary-text-color: rgb(118, 150, 43);
+   --project-text-color: rgb(230, 191, 64);
+   --orange-text: rgb(189, 135, 65);
+}
