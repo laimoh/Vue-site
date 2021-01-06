@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap" :class="{WP:theme === 'WP'}">
+  <div class="wrap" :class="{ WP:theme === 'WP', REC:theme === 'REC'}">
     <div class="b-heading">
       <h1>{{ heading }}</h1>
     </div>
@@ -18,12 +18,20 @@ export default {
 <style scoped>
 .wrap {
   position: relative;
-  top: 10vh;
   display: flex;
   width: 100%;
   height: 30vh;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.wrap.WP {
+  top: 10vh;
+}
+
+.wrap.REC {
+  /* height: 45vh;
+  top: 10vh; */
 }
 .b-heading h1 {
   font-family: "Roboto Mono", monospace;

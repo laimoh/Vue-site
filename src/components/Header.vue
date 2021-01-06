@@ -1,5 +1,5 @@
 <template>
-  <div class="header" :class="{ WP:theme === 'WP' }">
+  <div class="header" :class="{ WP:theme === 'WP', REC:theme === 'REC' }">
     <div class="title">
       <p>{{ header }}</p>
     </div>
@@ -16,10 +16,7 @@
 
 <script>
 export default {
-  props: ["header", "types", "theme", "scrolled"]
-  //   watch: {
-  //      "scrolled"
-  //   }
+  props: ["header", "types", "theme"]
 };
 </script>
 
@@ -36,6 +33,10 @@ export default {
   color: rgb(255, 255, 255);
   /* mix-blend-mode: difference; */
   z-index: 10;
+}
+
+.header.REC {
+  height: 15vh;
 }
 
 .blend {
@@ -55,10 +56,13 @@ export default {
 }
 
 .worktype {
+  font-family: "Space Mono", monospace;
   font-size: 0.8rem;
+  font-style: oblique;
 }
 
 .time {
+  font-family: "Space Mono", monospace;
   font-style: oblique;
   font-size: 0.8rem;
 }

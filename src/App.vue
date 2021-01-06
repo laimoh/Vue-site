@@ -8,19 +8,41 @@
           <h1>BLOG</h1>
         </div>
         <div class="list">
-          <div class="wrapper">
-            <h1 @click="closeProjects">{{ title }}</h1>
+          <div class="title">
+            <!-- <h1 @click="closeProjects">{{ title }}</h1> -->
+            <h1>
+              Just a
+              creator and designer attemping to connect
+              <span>⥃</span>
+              our
+              tangible
+              <span>▪</span> and
+              intangible
+              <span>✧</span> worlds.
+              <br />
+              <br />Currently residing in London.
+            </h1>
           </div>
           <ul>
-            <li @click="openWindPoetry">☞ Wind Poetry</li>
+            <li @click="openWindPoetry">
+              <span>☞</span> Wind Poetry
+            </li>
             <li @click="openRec">
-              ☞ Would You Like
+              <span>☞</span> Would You Like
               <br />A Receipt?
             </li>
-            <li>☞ Typed Speech</li>
-            <li>☞ Shek Leung</li>
-            <li>☞ Invisible Lines</li>
-            <li>☞ Yazdani Bakery</li>
+            <li @click="openSpeech">
+              <span>☞</span> Typed Speech
+            </li>
+            <li @click="openShek">
+              <span>☞</span> Shek Leung
+            </li>
+            <li @click="openIL">
+              <span>☞</span> Invisible Lines
+            </li>
+            <li @click="openYB">
+              <span>☞</span> Yazdani Bakery
+            </li>
           </ul>
         </div>
       </div>
@@ -59,20 +81,89 @@
           </div>
         </transition>
         <transition name="fade">
-          <div v-if="showRec" class="backdrop">
+          <div v-if="showRec" class="backdrop" @scroll.passive="handleScroll">
             <Header
               theme="REC"
               header="Would you like a receipt?"
               :types="['Chrome Extension','Data Visualisation','2020']"
             ></Header>
+            <div class="introVid top">
+              <video controls src="./assets/reciept/analyzer-promo-film_ig.mp4"></video>
+            </div>
+            <BodyText
+              theme="REC"
+              heading="ABOUT"
+              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
+            ></BodyText>
+            <div class="introVid adjust">
+              <video loop autoplay src="./assets/reciept/demo-main.mp4"></video>
+            </div>
+            <BodyText
+              theme="REC"
+              heading="PROCESS"
+              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
+            ></BodyText>
+            <div class="rec-vid-wrapper">
+              <div class="rec-vid-container">
+                <video loop autoplay src="./assets/reciept/demo0.mp4"></video>
+              </div>
+              <div class="rec-vid-container">
+                <video loop autoplay src="./assets/reciept/demo1.mp4"></video>
+              </div>
+              <div class="rec-vid-container">
+                <video loop autoplay src="./assets/reciept/demo2.mp4"></video>
+              </div>
+            </div>
+            <BodyText theme="WP" heading="TOOLS" body="✧ p5.js"></BodyText>
           </div>
         </transition>
+        <transition name="fade">
+          <div v-if="showSpeech" class="backdrop" @scroll.passive="handleScroll">
+            <Header
+              theme="SP"
+              header="Typed Speech"
+              :types="['Generative Design Tool','Voice Visualisation','2020']"
+            ></Header>
+          </div>
+        </transition>
+        <transition name="fade">
+          <div v-if="showShek" class="backdrop" @scroll.passive="handleScroll">
+            <Header
+              theme="SH"
+              header="Shek Leung"
+              :types="['Web Development','Identity Design','2020']"
+            ></Header>
+          </div>
+        </transition>
+        <transition name="fade">
+          <div v-if="showIL" class="backdrop" @scroll.passive="handleScroll">
+            <Header
+              theme="IL"
+              header="Invisible Lines"
+              :types="['UX/UI','Campaign & Identity Design','2020']"
+            ></Header>
+            <Video theme="IL" :vidSrc="srcIL"></Video>
+            <div class="introVid top">
+              <video controls src="/assets/invisible/invisible-lines-film.mp4"></video>
+            </div>
+            <img src="assets/invisible/.ig app_Social Media Art 1.png.icloud" />
+          </div>
+        </transition>
+        <!-- <transition name="fade">
+          <div v-if="showYB" class="backdrop" @scroll.passive="handleScroll">
+            <Header
+              theme="YB"
+              header="Yazdani Bakery"
+              :types="['Brand Identity Design','Publication Design','2019']"
+            ></Header>
+          </div>
+        </transition>-->
       </div>
     </div>
     <Gradient>
       <template v-slot:footer>
-        <h1>Laiqa Mohid</h1>
-        <h1>©2020</h1>
+        <h1 style="margin-top:10vh;">Laiqa Mohid</h1>
+        <h1 style="margin-top:20vh;">©2021</h1>
       </template>
     </Gradient>
   </div>
@@ -82,38 +173,72 @@
 import Header from "./components/Header.vue";
 import Gradient from "./components/Gradient.vue";
 import BodyText from "./components/BodyText.vue";
+import Video from "./components/Video.vue";
 
 export default {
   name: "App",
   components: {
     Header,
     Gradient,
-    BodyText
+    BodyText,
+    Video
   },
   data() {
     return {
-      title: "LIST OF WORKS",
-      ProjTitle: "Wind Poetry",
+      srcIL: "./assets/reciept/demo0.mp4",
       showWP: false,
-      showRec: false
+      showRec: false,
+      showSpeech: false,
+      showShek: false,
+      showIL: false
     };
   },
   methods: {
-    openWindPoetry() {
-      (this.title = "BACK TO HOME"),
-        (this.showWP = true),
-        (this.showRec = false);
-    },
-    openRec() {
-      (this.title = "BACK TO HOME"),
-        (this.showRec = true),
-        (this.showWP = false);
-    },
     closeProjects() {
-      this.title = "LIST OF WORKS";
+      // this.title = "LIST OF WORKS";
       this.showWP = false;
       this.showRec = false;
+      this.showSpeech = false;
+      this.showShek = false;
+      this.showIL = false;
+      // this.showYB = false;
     },
+    openWindPoetry() {
+      this.closeProjects();
+      setTimeout(() => {
+        this.showWP = true;
+      }, 800);
+    },
+    openRec() {
+      this.closeProjects();
+      setTimeout(() => {
+        this.showRec = true;
+      }, 800);
+    },
+    openSpeech() {
+      this.closeProjects();
+      setTimeout(() => {
+        this.showSpeech = true;
+      }, 800);
+    },
+    openShek() {
+      this.closeProjects();
+      setTimeout(() => {
+        this.showShek = true;
+      }, 800);
+    },
+    openIL() {
+      this.closeProjects();
+      setTimeout(() => {
+        this.showIL = true;
+      }, 800);
+    },
+    //  openYB() {
+    //    this.closeProjects();
+    //    setTimeout(() => {
+    //      this.showYB = true;
+    //    }, 800);
+    //  },
     handleScroll(e) {
       var scrollPos = e.target.scrollTop;
       let h = document.querySelector(".header");
@@ -122,13 +247,12 @@ export default {
       } else {
         h.classList.remove("blend");
       }
-      // console.log(scrollPos);
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: "Roboto Mono";
   -webkit-font-smoothing: antialiased;
@@ -144,7 +268,7 @@ export default {
   transition: opacity 0.5s ease-out !important;
 }
 
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0 !important;
 }
@@ -174,8 +298,6 @@ export default {
 .container {
   height: 95%;
   border-radius: 25px;
-
-  background: rgba(114, 107, 107, 0.986);
 }
 
 .index {
@@ -208,7 +330,7 @@ export default {
 .contact h1 {
   border: solid 1px rgb(189, 135, 65);
   border-radius: 18%;
-  color: var(--project-text-color);
+  color: var(--yellow-text-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -219,35 +341,38 @@ export default {
 }
 
 .contact h1:hover {
-  color: rgb(189, 135, 65);
-  border: solid 1px var(--project-text-color);
+  color: var(--yellow-text-color);
+  border: solid 1px var(--yellow-text-color);
+  transition: all ease 0.2s;
 }
 
 .list {
   height: 85%;
+  width: 80%;
   list-style: none;
   display: flex;
+  flex-direction: column;
   border-radius: 25px;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.wrapper h1 {
-  font-family: "Roboto Mono", monospace;
-  color: var(--project-text-color);
+.title {
+  text-align: right;
+}
 
+.title h1 {
+  font-family: "Space Mono", monospace;
+  color: var(--yellow-text-color);
   font-size: 12px;
   font-weight: normal;
-  writing-mode: tb-rl;
-  transform: rotate(-180deg);
-  padding: 0.8rem 0.2rem;
-  border: solid 0.5px rgb(189, 135, 65);
-  margin-left: 2rem;
-  border-radius: 25px;
-  transition: all ease 0.5s;
+  margin-bottom: 3rem;
+  transition: all ease 0.2s;
 }
 
-.wrapper h1:hover {
-  cursor: pointer;
-  color: var(--project-text-color);
+.title h1 span {
+  /* text-decoration: underline; */
+  color: var(--orange-text-color);
 }
 
 ul {
@@ -255,11 +380,14 @@ ul {
   margin: 0;
   padding: 0;
   font-family: "Space Mono", monospace;
-  color: var(--project-text-color);
-  font-size: 15px;
-  margin-top: 8rem;
-  margin-right: 2.5rem;
+  color: var(--yellow-text-color);
+  font-size: 13px;
   white-space: nowrap;
+}
+
+ul li span {
+  color: rgb(189, 135, 65);
+  font-size: 1.6rem;
 }
 
 .indent {
@@ -267,18 +395,18 @@ ul {
 }
 
 .list li {
-  margin: 2rem 0rem;
-  /* color: var(--main-bg-color); */
+  margin: 1rem 0rem;
   transition: all 0.5s;
 }
 
 .list li:hover {
   transform: translateX(8px);
-  color: rgb(189, 135, 65);
+  color: var(--orange-text-color);
   cursor: pointer;
 }
 
 .backdrop {
+  /* position: absolute; */
   width: 95%;
   height: 95%;
   border-radius: 25px;
@@ -291,10 +419,6 @@ ul {
   background-color: transparent;
   width: 0.5em;
 }
-
-/* .backdrop::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-} */
 
 .backdrop::-webkit-scrollbar-thumb {
   background-color: rgba(216, 216, 216, 0.44);
@@ -312,7 +436,7 @@ ul {
   box-shadow: 0px 7px 12px 10px rgba(0, 0, 0, 0.62);
 }
 
-.introImg video {
+video {
   width: 100%;
   height: auto;
   border-radius: 25px;
@@ -328,13 +452,38 @@ ul {
   box-shadow: 0px 7px 12px 10px rgba(0, 0, 0, 0.62);
 }
 
-.introVid video {
-  width: 100%;
-  height: auto;
-  border-radius: 25px;
+.top {
+  top: 20vh;
+  margin-bottom: 20vh;
 }
 
-.footer {
-  display: ;
+.intro-vid-wrapper {
+  width: 40%;
+  height: 40vh;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.adjust {
+  height: 79%;
+  top: 0vh;
+}
+
+.rec-vid-wrapper {
+  width: 65vw;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.rec-vid-container {
+  width: 19vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rec-vid-container video {
+  border-radius: 0px;
 }
 </style>
