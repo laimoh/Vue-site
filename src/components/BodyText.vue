@@ -1,6 +1,9 @@
 <template>
-  <div class="wrap" :class="{ WP:theme === 'WP', REC:theme === 'REC'}">
-    <div class="b-heading">
+  <div
+    class="wrap"
+    :class="{ WP:theme === 'WP', REC:theme === 'REC', IL:theme === 'IL', subtext:theme === 'subtext', reverse:theme === 'reverse' }"
+  >
+    <div class="b-heading" :class="{ reverse:theme === 'reverse' }">
       <h1>{{ heading }}</h1>
     </div>
     <div class="body-text">
@@ -29,10 +32,22 @@ export default {
   top: 10vh;
 }
 
-.wrap.REC {
-  /* height: 45vh;
-  top: 10vh; */
+.wrap.IL {
+  top: 15vh;
+  height: 24vh;
+  /* margin-bottom: 5vh; */
 }
+
+.wrap.subtext {
+  flex-direction: row;
+  /* margin-bottom: 5vh; */
+}
+
+.wrap.reverse {
+  flex-direction: row-reverse;
+  /* margin-bottom: 5vh; */
+}
+
 .b-heading h1 {
   font-family: "Roboto Mono", monospace;
   color: rgb(211, 211, 210);
@@ -46,9 +61,24 @@ export default {
   /* transition: all ease 0.5s; */
 }
 
+.b-heading.reverse {
+  transform: rotate(180deg);
+}
+
 .body-text {
   width: 60vw;
 }
+
+.subtext .body-text {
+  padding: 0vw 1vw;
+  width: 25vw;
+}
+
+.reverse .body-text {
+  padding: 0vw 1vw;
+  width: 25vw;
+}
+
 .body-text p {
   font-family: "Space Mono", monospace;
   color: rgb(255, 255, 255);

@@ -20,7 +20,7 @@
               intangible
               <span>✧</span> worlds.
               <br />
-              <br />Currently residing in London.
+              <br />Currently residing in London, UK.
             </h1>
           </div>
           <ul>
@@ -142,11 +142,42 @@
               header="Invisible Lines"
               :types="['UX/UI','Campaign & Identity Design','2020']"
             ></Header>
-            <Video theme="IL" :vidSrc="srcIL"></Video>
-            <div class="introVid top">
-              <video controls src="/assets/invisible/invisible-lines-film.mp4"></video>
+            <BodyText
+              theme="IL"
+              heading="ABOUT"
+              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
+            ></BodyText>
+            <Video theme="IL" :vidSrc="require(`./assets/invi-lines/${srcIL.vid}`)"></Video>
+            <div class="wrap-align">
+              <Image theme="subtext" :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[3]}`)"></Image>
+              <Image theme="subtext" :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[2]}`)"></Image>
             </div>
-            <img src="assets/invisible/.ig app_Social Media Art 1.png.icloud" />
+            <div class="text-aligner">
+              <BodyText
+                theme="subtext"
+                heading="APP"
+                body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque."
+              ></BodyText>
+              <BodyText
+                theme="reverse"
+                heading="APP"
+                body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque."
+              ></BodyText>
+            </div>
+            <Image theme="IL" :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[0]}`)"></Image>
+            <div class="text-aligner">
+              <BodyText
+                theme="subtext"
+                heading="POSTER"
+                body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus."
+              ></BodyText>
+              <BodyText
+                theme="reverse"
+                heading="VINYL COVER"
+                body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placeraid dapibus sem justo a ante.."
+              ></BodyText>
+            </div>
+            <Image theme="noshadow" :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[1]}`)"></Image>
           </div>
         </transition>
         <!-- <transition name="fade">
@@ -174,6 +205,7 @@ import Header from "./components/Header.vue";
 import Gradient from "./components/Gradient.vue";
 import BodyText from "./components/BodyText.vue";
 import Video from "./components/Video.vue";
+import Image from "./components/Image.vue";
 
 export default {
   name: "App",
@@ -181,11 +213,20 @@ export default {
     Header,
     Gradient,
     BodyText,
-    Video
+    Video,
+    Image
   },
   data() {
     return {
-      srcIL: "./assets/reciept/demo0.mp4",
+      srcIL: {
+        vid: "invisible-lines-film.mp4",
+        imgs: [
+          "POSTER_IL.jpg",
+          "VINYL-COVER.png",
+          "APP_IL_2.png",
+          "APP_IL_1.png"
+        ]
+      },
       showWP: false,
       showRec: false,
       showSpeech: false,
@@ -271,6 +312,10 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0 !important;
+}
+
+.center {
+  margin: auto;
 }
 
 .giant-container {
@@ -364,9 +409,9 @@ export default {
 .title h1 {
   font-family: "Space Mono", monospace;
   color: var(--yellow-text-color);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: normal;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   transition: all ease 0.2s;
 }
 
@@ -383,6 +428,7 @@ ul {
   color: var(--yellow-text-color);
   font-size: 13px;
   white-space: nowrap;
+  margin-left: -2rem;
 }
 
 ul li span {
@@ -486,4 +532,28 @@ video {
 .rec-vid-container video {
   border-radius: 0px;
 }
+
+.wrap-align {
+  display: flex;
+  width: 64vw;
+  /* justify-content: space-evenly; */
+  margin: auto;
+}
+
+.text-aligner {
+  display: flex;
+}
+/* 
+.img-heading {
+  position: relative;
+  font-family: "Roboto Mono", monospace;
+  color: rgb(211, 211, 210);
+  font-size: 11px;
+  font-weight: normal;
+  writing-mode: tb-rl;
+  transform: rotate(-180deg);
+  padding: 2rem 0.2rem;
+  border: solid 0.5px rgb(211, 211, 210);
+  border-radius: 25px;
+} */
 </style>
