@@ -11,50 +11,139 @@
           <div class="title">
             <!-- <h1 @click="closeProjects">{{ title }}</h1> -->
             <h1>
-              Just a
-              creator and designer attemping to connect
+              Just a creator and designer attemping to connect
               <span>⥃</span>
-              our
-              tangible
-              <span>▪</span> and
-              intangible
-              <span>✧</span> worlds.
+              our tangible
+              <span>▪</span> and intangible <span>✧</span> worlds.
               <br />
               <br />Currently residing in London, UK.
             </h1>
           </div>
           <ul>
-            <li @click="openWindPoetry">
-              <span>☞</span> Wind Poetry
-            </li>
+            <li @click="openSpeech"><span>☞</span> Typed Speech</li>
+            <li @click="openWindPoetry"><span>☞</span> Wind Poetry</li>
             <li @click="openRec">
-              <span>☞</span> Would You Like
-              <br />A Receipt?
+              <span>☞</span> Would You Like <br />A Receipt?
             </li>
-            <li @click="openSpeech">
-              <span>☞</span> Typed Speech
-            </li>
-            <li @click="openShek">
-              <span>☞</span> Shek Leung
-            </li>
-            <li @click="openIL">
-              <span>☞</span> Invisible Lines
-            </li>
-            <li @click="openYB">
-              <span>☞</span> Yazdani Bakery
-            </li>
+            <li @click="openShek"><span>☞</span> Shek Leung</li>
+            <li @click="openIL"><span>☞</span> Invisible Lines</li>
+            <li @click="openYB"><span>☞</span> Yazdani Bakery</li>
           </ul>
         </div>
       </div>
     </div>
     <div class="gradient">
       <div style="width: 97%;" class="project container">
+        <!-- <div v-if="showCnv" class="container border"> -->
+        <transition name="fade">
+          <div v-if="showCnv" id="p5Canvas"></div>
+        </transition>
+        <!-- </div> -->
+        <transition name="fade">
+          <div
+            v-if="showSpeech"
+            class="backdrop"
+            @scroll.passive="handleScroll"
+          >
+            <Header
+              theme="TS"
+              header="Typed Speech"
+              subhead="(Ongoing)"
+              :types="['Generative Design Tool', 'Voice Visualisation', '2020']"
+            ></Header>
+            <div class="sitelink">
+              <a href="https://sonic-type.glitch.me/">Working Site ↗</a>
+            </div>
+            <div class="TS-introVid top">
+              <video controls src="../public/assets/type/intro.mp4"></video>
+            </div>
+            <BodyText
+              theme="TS"
+              heading="ABOUT"
+              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
+            ></BodyText>
+            <div class="TS-vidGallery">
+              <div class="TS-vidDemo">
+                <video
+                  @mouseover="focusVid"
+                  @mouseleave="unfocusVid"
+                  src="../public/assets/type/iswhatitis3.mp4"
+                ></video>
+              </div>
+              <div class="TS-vidDemo">
+                <video
+                  @mouseover="focusVid"
+                  @mouseleave="unfocusVid"
+                  src="../public/assets/type/hi-there.mp4"
+                ></video>
+              </div>
+              <div class="TS-vidDemo">
+                <video
+                  @mouseover="focusVid"
+                  @mouseleave="unfocusVid"
+                  src="../public/assets/type/g-afternoon.mp4"
+                ></video>
+              </div>
+              <div class="TS-vidDemo">
+                <video
+                  @mouseover="focusVid"
+                  @mouseleave="unfocusVid"
+                  src="../public/assets/type/xcuse.mp4"
+                ></video>
+              </div>
+              <div class="TS-vidDemo">
+                <video
+                  @mouseover="focusVid"
+                  @mouseleave="unfocusVid"
+                  src="../public/assets/type/interesting.mp4"
+                ></video>
+              </div>
+              <div class="TS-vidDemo">
+                <video
+                  @mouseover="focusVid"
+                  @mouseleave="unfocusVid"
+                  src="../public/assets/type/wonder.mp4"
+                ></video>
+              </div>
+              <div class="TS-vidDemo">
+                <video
+                  @mouseover="focusVid"
+                  @mouseleave="unfocusVid"
+                  src="../public/assets/type/ladybird2.mp4"
+                ></video>
+              </div>
+              <div class="TS-vidDemo">
+                <video
+                  @mouseover="focusVid"
+                  @mouseleave="unfocusVid"
+                  src="../public/assets/type/tea.mp4"
+                ></video>
+              </div>
+            </div>
+            <BodyText
+              theme="REC"
+              heading="PROCESS"
+              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
+            ></BodyText>
+            <Carousel @next="next" @prev="prev">
+              <CarouselSlide
+                v-for="(slide, index) in process.TS"
+                :key="slide"
+                :index="index"
+                :visibleSlide="process.visibleSlide"
+              >
+                <img :src="slide" />
+              </CarouselSlide>
+            </Carousel>
+            <!-- <img alt="page 1" :src="process.TS[0]" /> -->
+          </div>
+        </transition>
         <transition name="fade">
           <div v-if="showWP" class="backdrop" @scroll.passive="handleScroll">
             <Header
               theme="WP"
               header="Wind Poetry"
-              :types="['Interaction','Data Visualisation','2020']"
+              :types="['Interaction', 'Data Visualisation', '2020']"
             ></Header>
             <BodyText
               theme="WP"
@@ -66,7 +155,7 @@
                 alt="GIF DEMO"
                 loop
                 autoplay="autoplay"
-                src="./assets/wind/wind_poetry-demo-1.mp4"
+                src="../public/assets/wind/wind_poetry-demo-1.mp4"
               ></video>
             </div>
             <BodyText
@@ -75,7 +164,10 @@
               body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
             ></BodyText>
             <div class="introVid">
-              <video controls src="./assets/wind/wind_poetry-demo.mp4"></video>
+              <video
+                controls
+                src="../public/assets/wind/wind_poetry-demo.mp4"
+              ></video>
             </div>
             <BodyText theme="WP" heading="TOOLS" body="✧ p5.js"></BodyText>
           </div>
@@ -85,10 +177,14 @@
             <Header
               theme="REC"
               header="Would you like a receipt?"
-              :types="['Chrome Extension','Data Visualisation','2020']"
+              :types="['Chrome Extension', 'Data Visualisation', '2020']"
             ></Header>
             <div class="introVid top">
-              <video controls src="./assets/reciept/analyzer-promo-film_ig.mp4"></video>
+              <video
+                autoplay
+                controls
+                src="../public/assets/reciept/analyzer-promo-film_ig.mp4"
+              ></video>
             </div>
             <BodyText
               theme="REC"
@@ -96,7 +192,11 @@
               body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
             ></BodyText>
             <div class="introVid adjust">
-              <video loop autoplay src="./assets/reciept/demo-main.mp4"></video>
+              <video
+                loop
+                autoplay
+                src="../public/assets/reciept/demo-main.mp4"
+              ></video>
             </div>
             <BodyText
               theme="REC"
@@ -105,25 +205,28 @@
             ></BodyText>
             <div class="rec-vid-wrapper">
               <div class="rec-vid-container">
-                <video loop autoplay src="./assets/reciept/demo0.mp4"></video>
+                <video
+                  loop
+                  autoplay
+                  src="../public/assets/reciept/demo0.mp4"
+                ></video>
               </div>
               <div class="rec-vid-container">
-                <video loop autoplay src="./assets/reciept/demo1.mp4"></video>
+                <video
+                  loop
+                  autoplay
+                  src="../public/assets/reciept/demo1.mp4"
+                ></video>
               </div>
               <div class="rec-vid-container">
-                <video loop autoplay src="./assets/reciept/demo2.mp4"></video>
+                <video
+                  loop
+                  autoplay
+                  src="../public/assets/reciept/demo2.mp4"
+                ></video>
               </div>
             </div>
             <BodyText theme="WP" heading="TOOLS" body="✧ p5.js"></BodyText>
-          </div>
-        </transition>
-        <transition name="fade">
-          <div v-if="showSpeech" class="backdrop" @scroll.passive="handleScroll">
-            <Header
-              theme="SP"
-              header="Typed Speech"
-              :types="['Generative Design Tool','Voice Visualisation','2020']"
-            ></Header>
           </div>
         </transition>
         <transition name="fade">
@@ -131,8 +234,13 @@
             <Header
               theme="SH"
               header="Shek Leung"
-              :types="['Web Development','Identity Design','2020']"
+              :types="['Web Development', 'Identity Design', '2020']"
             ></Header>
+            <BodyText
+              theme="SL"
+              heading="ABOUT"
+              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
+            ></BodyText>
           </div>
         </transition>
         <transition name="fade">
@@ -140,17 +248,26 @@
             <Header
               theme="IL"
               header="Invisible Lines"
-              :types="['UX/UI','Campaign & Identity Design','2020']"
+              :types="['UX/UI', 'Campaign & Identity Design', '2020']"
             ></Header>
             <BodyText
               theme="IL"
               heading="ABOUT"
               body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
             ></BodyText>
-            <Video theme="IL" :vidSrc="require(`./assets/invi-lines/${srcIL.vid}`)"></Video>
+            <Video
+              theme="IL"
+              :vidSrc="require(`./assets/invi-lines/${srcIL.vid}`)"
+            ></Video>
             <div class="wrap-align">
-              <Image theme="subtext" :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[3]}`)"></Image>
-              <Image theme="subtext" :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[2]}`)"></Image>
+              <Image
+                theme="subtext"
+                :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[3]}`)"
+              ></Image>
+              <Image
+                theme="subtext"
+                :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[2]}`)"
+              ></Image>
             </div>
             <div class="text-aligner">
               <BodyText
@@ -164,7 +281,10 @@
                 body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque."
               ></BodyText>
             </div>
-            <Image theme="IL" :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[0]}`)"></Image>
+            <Image
+              theme="IL"
+              :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[0]}`)"
+            ></Image>
             <div class="text-aligner">
               <BodyText
                 theme="subtext"
@@ -177,7 +297,10 @@
                 body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placeraid dapibus sem justo a ante.."
               ></BodyText>
             </div>
-            <Image theme="noshadow" :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[1]}`)"></Image>
+            <Image
+              theme="noshadow"
+              :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[1]}`)"
+            ></Image>
           </div>
         </transition>
         <!-- <transition name="fade">
@@ -201,9 +324,12 @@
 </template>
 
 <script>
+// import P5 from "p5";
 import Header from "./components/Header.vue";
 import Gradient from "./components/Gradient.vue";
 import BodyText from "./components/BodyText.vue";
+import Carousel from "./components/Carousel.vue";
+import CarouselSlide from "./components/CarouselSlide.vue";
 import Video from "./components/Video.vue";
 import Image from "./components/Image.vue";
 
@@ -213,11 +339,25 @@ export default {
     Header,
     Gradient,
     BodyText,
+    Carousel,
+    CarouselSlide,
     Video,
     Image
   },
   data() {
     return {
+      process: {
+        TS: [
+          require("../public/assets/slides/process-TS-1.jpg"),
+          require("../public/assets/slides/process-TS-2.jpg"),
+          require("../public/assets/slides/process-TS-3.jpg"),
+          require("../public/assets/slides/process-TS-4.jpg"),
+          require("../public/assets/slides/process-TS-5.jpg"),
+          require("../public/assets/slides/process-TS-6.jpg"),
+          require("../public/assets/slides/process-TS-7.jpg")
+        ],
+        visibleSlide: 0
+      },
       srcIL: {
         vid: "invisible-lines-film.mp4",
         imgs: [
@@ -227,6 +367,7 @@ export default {
           "APP_IL_1.png"
         ]
       },
+      showCnv: true,
       showWP: false,
       showRec: false,
       showSpeech: false,
@@ -234,15 +375,88 @@ export default {
       showIL: false
     };
   },
+  mounted() {
+    if (this.showCnv) {
+      const script = function(p5) {
+        let numOfPoints = 200;
+        let spacing, initialPosX, initialPosY;
+        let time = 0;
+        let time2 = 0;
+
+        let posHistory = [];
+
+        p5.setup = _ => {
+          let canvas = p5.createCanvas(1000, 700);
+          canvas.parent("p5Canvas");
+          canvas.style("border-radius", "25px");
+          initialPosX = 500;
+          initialPosY = 350;
+          spacing = 1.5;
+        };
+
+        const wave = (num, amp, freq) => {
+          // your method
+          return amp * p5.sin((freq * p5.TWO_PI * num) / numOfPoints + time);
+        };
+
+        const savePoints = () => {
+          let phistory = [];
+          let mappedY = Math.floor(p5.map(p5.mouseY, 0, p5.height, 5, 100));
+          let mappedX = Math.floor(p5.map(p5.mouseX, 0, p5.width, 5, 30));
+
+          for (let i = 0; i < numOfPoints; i++) {
+            let angle = (p5.TWO_PI * i) / numOfPoints;
+            let r = 250 + wave(i, mappedX, 10) + wave(i, mappedY, 3);
+            // let r2 = 150 + wave(i, mappedY, 3) + wave(i, mappedY, 7);
+            let x = initialPosX + r * p5.cos(angle);
+            let y = initialPosY + r * p5.sin(angle);
+            let v = p5.createVector(x, y);
+            phistory.push(v);
+          }
+          return phistory;
+        };
+
+        const getPosHistory = () => {
+          let p = savePoints();
+          posHistory.push(p);
+
+          if (posHistory.length > 5) {
+            posHistory.shift();
+          }
+        };
+
+        p5.draw = _ => {
+          getPosHistory();
+
+          for (let i = 0; i < posHistory.length; i++) {
+            let pos = posHistory[i]; // an array of 25 positions of the whole shape
+
+            for (let j = 0; j < pos.length; j++) {
+              //   p5.noStroke();
+              //   p5.fill(60, 50, 2);
+              p5.blendMode(p5.EXCLUSION);
+              p5.noFill();
+              p5.stroke(35, 23, 48);
+              p5.point(pos[j].x, pos[j].y);
+             
+            }
+          }
+          time = time + 0.05;
+        };
+      };
+
+      const P5 = require("p5");
+      new P5(script);
+    }
+  },
   methods: {
     closeProjects() {
-      // this.title = "LIST OF WORKS";
+      this.showCnv = false;
       this.showWP = false;
       this.showRec = false;
       this.showSpeech = false;
       this.showShek = false;
       this.showIL = false;
-      // this.showYB = false;
     },
     openWindPoetry() {
       this.closeProjects();
@@ -288,6 +502,31 @@ export default {
       } else {
         h.classList.remove("blend");
       }
+    },
+    focusVid(e) {
+      let srcVid = e.srcElement;
+      srcVid.classList.add("focused");
+      srcVid.play();
+    },
+    unfocusVid(e) {
+      let srcVid = e.srcElement;
+      srcVid.classList.remove("focused");
+    },
+    next() {
+      if (this.process.visibleSlide >= this.process.TS.length - 1) {
+        this.process.visibleSlide = 0;
+      } else {
+        this.process.visibleSlide++;
+      }
+      console.log(this.process.visibleSlide);
+    },
+    prev() {
+      console.log("prev");
+      if (this.process.visibleSlide <= 0) {
+        this.process.visibleSlide = this.process.TS.length - 1;
+      } else {
+        this.process.visibleSlide--;
+      }
     }
   }
 };
@@ -299,9 +538,21 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.focused {
+  transform: scale(1.1, 1.2);
+}
+
+video:focus {
+  outline: none;
+}
 
 .blend {
   mix-blend-mode: difference;
+}
+
+.TS-vidDemo audio {
+  width: 100%;
+  height: 50%;
 }
 
 .fade-enter-active,
@@ -316,6 +567,39 @@ export default {
 
 .center {
   margin: auto;
+}
+
+canvas {
+  border-radius: 20px;
+}
+
+.sitelink {
+  position: relative;
+  top: 15vh;
+  left: 50vw;
+  width: 20vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sitelink a {
+  font-family: "Roboto Mono", monospace;
+  color: white;
+  font-size: 13px;
+  font-weight: normal;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.8rem 0.8rem;
+  border: solid 0.5px white;
+  border-radius: 25px;
+  transition: all 0.5s ease;
+}
+
+.sitelink a:hover {
+  color: var(--yellow-text-color);
+  border: solid 0.5px var(--yellow-text-color);
 }
 
 .giant-container {
@@ -498,6 +782,41 @@ video {
   box-shadow: 0px 7px 12px 10px rgba(0, 0, 0, 0.62);
 }
 
+.TS-introVid {
+  position: relative;
+  top: 15vh;
+  width: 92%;
+  height: 72%;
+  border-radius: 25px;
+  margin: auto;
+}
+
+.TS-introVid video {
+  box-shadow: 0px 7px 12px 10px rgba(0, 0, 0, 0.62);
+}
+
+.TS-vidGallery {
+  /* outline: solid 1px black; */
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 65vw;
+  height: 100vh;
+}
+
+.TS-vidDemo {
+  /* outline: solid 1px green; */
+  width: 45%;
+}
+
+.TS-vidDemo video {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0px 5px 7px 4px rgba(0, 0, 0, 0.62);
+  transition: all 0.5s ease;
+}
 .top {
   top: 20vh;
   margin-bottom: 20vh;
@@ -543,6 +862,7 @@ video {
 .text-aligner {
   display: flex;
 }
+
 /* 
 .img-heading {
   position: relative;

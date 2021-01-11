@@ -1,7 +1,7 @@
 <template>
   <div
     class="wrap"
-    :class="{ WP:theme === 'WP', REC:theme === 'REC', IL:theme === 'IL', subtext:theme === 'subtext', reverse:theme === 'reverse' }"
+    :class="{ WP:theme === 'WP', REC:theme === 'REC', IL:theme === 'IL', subtext:theme === 'subtext', reverse:theme === 'reverse', TS:theme === 'TS' }"
   >
     <div class="b-heading" :class="{ reverse:theme === 'reverse' }">
       <h1>{{ heading }}</h1>
@@ -32,10 +32,13 @@ export default {
   top: 10vh;
 }
 
+.wrap.REC {
+  /* height: 10vh; */
+}
+
 .wrap.IL {
   top: 15vh;
   height: 24vh;
-  /* margin-bottom: 5vh; */
 }
 
 .wrap.subtext {
