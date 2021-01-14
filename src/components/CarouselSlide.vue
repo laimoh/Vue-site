@@ -1,9 +1,7 @@
 <template>
-  <transition name="left">
-    <div v-show="visibleSlide === index" class="carousel-slide">
-      <slot></slot>
-    </div>
-  </transition>
+  <div v-show="visibleSlide === index" class="carousel-slide">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -16,8 +14,8 @@ export default {
 </script>
 
 <style>
-.carousel-slide {
-}
+/* .carousel-slide {
+} */
 .carousel-slide img {
   width: 100%;
   height: 100%;

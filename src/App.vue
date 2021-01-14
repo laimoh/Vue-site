@@ -9,26 +9,38 @@
         </div>
         <div class="list">
           <div class="title">
-            <!-- <h1 @click="closeProjects">{{ title }}</h1> -->
             <h1>
               Just a creator and designer attemping to connect
               <span>⥃</span>
               our tangible
-              <span>▪</span> and intangible <span>✧</span> worlds.
+              <span>▪</span> and intangible
+              <span>✧</span> worlds.
               <br />
               <br />Currently residing in London, UK.
             </h1>
           </div>
           <ul>
-            <li @click="openSpeech"><span>☞</span> Typed Speech</li>
-            <li @click="openWindPoetry"><span>☞</span> Wind Poetry</li>
-            <li @click="openRec">
-              <span>☞</span> Would You Like <br />A Receipt?
+            <li @click="openSpeech">
+              <span>☞</span> Typed Speech
             </li>
-            <li @click="openShek"><span>☞</span> Shek Leung</li>
-            <li @click="openIL"><span>☞</span> Invisible Lines</li>
-            <li @click="openYB"><span>☞</span> Yazdani Bakery</li>
+            <li @click="openWindPoetry">
+              <span>☞</span> Wind Poetry
+            </li>
+            <li @click="openRec">
+              <span>☞</span> Would You Like
+              <br />A Receipt?
+            </li>
+            <li @click="openShek">
+              <span>☞</span> Shek Leung
+            </li>
+            <li @click="openIL">
+              <span>☞</span> Invisible Lines
+            </li>
+            <li @click="openYB">
+              <span>☞</span> Yazdani Bakery
+            </li>
           </ul>
+          <!-- <p @click="goHome" class="home">⌂</p> -->
         </div>
       </div>
     </div>
@@ -36,15 +48,11 @@
       <div style="width: 97%;" class="project container">
         <!-- <div v-if="showCnv" class="container border"> -->
         <transition name="fade">
-          <div v-if="showCnv" id="p5Canvas"></div>
+          <div style="pointer-events:none;" v-if="showCnv" id="p5Canvas"></div>
         </transition>
         <!-- </div> -->
         <transition name="fade">
-          <div
-            v-if="showSpeech"
-            class="backdrop"
-            @scroll.passive="handleScroll"
-          >
+          <div v-if="showSpeech" class="backdrop" @scroll.passive="handleScroll">
             <Header
               theme="TS"
               header="Typed Speech"
@@ -164,10 +172,7 @@
               body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
             ></BodyText>
             <div class="introVid">
-              <video
-                controls
-                src="../public/assets/wind/wind_poetry-demo.mp4"
-              ></video>
+              <video controls src="../public/assets/wind/wind_poetry-demo.mp4"></video>
             </div>
             <BodyText theme="WP" heading="TOOLS" body="✧ p5.js"></BodyText>
           </div>
@@ -180,11 +185,7 @@
               :types="['Chrome Extension', 'Data Visualisation', '2020']"
             ></Header>
             <div class="introVid top">
-              <video
-                autoplay
-                controls
-                src="../public/assets/reciept/analyzer-promo-film_ig.mp4"
-              ></video>
+              <video autoplay controls src="../public/assets/reciept/analyzer-promo-film_ig.mp4"></video>
             </div>
             <BodyText
               theme="REC"
@@ -192,11 +193,7 @@
               body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
             ></BodyText>
             <div class="introVid adjust">
-              <video
-                loop
-                autoplay
-                src="../public/assets/reciept/demo-main.mp4"
-              ></video>
+              <video loop autoplay src="../public/assets/reciept/demo-main.mp4"></video>
             </div>
             <BodyText
               theme="REC"
@@ -205,27 +202,26 @@
             ></BodyText>
             <div class="rec-vid-wrapper">
               <div class="rec-vid-container">
-                <video
-                  loop
-                  autoplay
-                  src="../public/assets/reciept/demo0.mp4"
-                ></video>
+                <video loop autoplay src="../public/assets/reciept/demo0.mp4"></video>
               </div>
               <div class="rec-vid-container">
-                <video
-                  loop
-                  autoplay
-                  src="../public/assets/reciept/demo1.mp4"
-                ></video>
+                <video loop autoplay src="../public/assets/reciept/demo1.mp4"></video>
               </div>
               <div class="rec-vid-container">
-                <video
-                  loop
-                  autoplay
-                  src="../public/assets/reciept/demo2.mp4"
-                ></video>
+                <video loop autoplay src="../public/assets/reciept/demo2.mp4"></video>
               </div>
             </div>
+            <Carousel @next="next" @prev="prev">
+              <CarouselSlide
+                v-for="(slide, index) in process.rec"
+                :key="slide"
+                :index="index"
+                :visibleSlide="process.visibleSlide"
+              >
+                <img :src="slide" />
+              </CarouselSlide>
+            </Carousel>
+
             <BodyText theme="WP" heading="TOOLS" body="✧ p5.js"></BodyText>
           </div>
         </transition>
@@ -255,19 +251,16 @@
               heading="ABOUT"
               body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque. In eu dapibus lectus. Etiam consequat, massa ut consequat lacinia, velit dui molestie dolor, id dapibus sem justo a ante. In pellentesque, odio ut pharetra congue, quam tellus efficitur arcu, non mattis risus nibh ac turpis."
             ></BodyText>
-            <Video
-              theme="IL"
-              :vidSrc="require(`./assets/invi-lines/${srcIL.vid}`)"
-            ></Video>
+            <div class="vidStd IL">
+              <video autoplay controls src="../public/assets/invi-lines/invisible-lines-film.mp4"></video>
+            </div>
             <div class="wrap-align">
-              <Image
-                theme="subtext"
-                :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[3]}`)"
-              ></Image>
-              <Image
-                theme="subtext"
-                :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[2]}`)"
-              ></Image>
+              <div class="visual subtext">
+                <img class="noshadow" src="../public/assets/invi-lines/APP_IL_2.png" />
+              </div>
+              <div class="visual subtext">
+                <img class="noshadow" src="../public/assets/invi-lines/APP_IL_1.png" />
+              </div>
             </div>
             <div class="text-aligner">
               <BodyText
@@ -277,14 +270,13 @@
               ></BodyText>
               <BodyText
                 theme="reverse"
-                heading="APP"
+                heading="AR"
                 body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placerat, non ultricies dui faucibus. Vivamus lobortis sapien porttitor, molestie urna ut, varius neque."
               ></BodyText>
             </div>
-            <Image
-              theme="IL"
-              :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[0]}`)"
-            ></Image>
+            <div class="visual IL">
+              <img class="noshadow" src="../public/assets/invi-lines/POSTER_IL.jpg" />
+            </div>
             <div class="text-aligner">
               <BodyText
                 theme="subtext"
@@ -297,10 +289,9 @@
                 body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nulla magna, consectetur quis tellus eget, ultricies mattis nisi. Duis dictum dolor in ante placeraid dapibus sem justo a ante.."
               ></BodyText>
             </div>
-            <Image
-              theme="noshadow"
-              :imgSrc="require(`./assets/invi-lines/${srcIL.imgs[1]}`)"
-            ></Image>
+            <div class="visual">
+              <img class="noshadow" src="../public/assets/invi-lines/VINYL-COVER.png" />
+            </div>
           </div>
         </transition>
         <!-- <transition name="fade">
@@ -330,8 +321,6 @@ import Gradient from "./components/Gradient.vue";
 import BodyText from "./components/BodyText.vue";
 import Carousel from "./components/Carousel.vue";
 import CarouselSlide from "./components/CarouselSlide.vue";
-import Video from "./components/Video.vue";
-import Image from "./components/Image.vue";
 
 export default {
   name: "App",
@@ -340,9 +329,7 @@ export default {
     Gradient,
     BodyText,
     Carousel,
-    CarouselSlide,
-    Video,
-    Image
+    CarouselSlide
   },
   data() {
     return {
@@ -356,16 +343,16 @@ export default {
           require("../public/assets/slides/process-TS-6.jpg"),
           require("../public/assets/slides/process-TS-7.jpg")
         ],
+        rec: [
+          require("../public/assets/slides/process-REC-1.jpg"),
+          require("../public/assets/slides/process-REC-2.jpg"),
+          require("../public/assets/slides/process-REC-3.jpg"),
+          require("../public/assets/slides/process-REC-4.jpg"),
+          require("../public/assets/slides/process-REC-5.jpg"),
+          require("../public/assets/slides/process-REC-6.jpg"),
+          require("../public/assets/slides/process-REC-7.jpg")
+        ],
         visibleSlide: 0
-      },
-      srcIL: {
-        vid: "invisible-lines-film.mp4",
-        imgs: [
-          "POSTER_IL.jpg",
-          "VINYL-COVER.png",
-          "APP_IL_2.png",
-          "APP_IL_1.png"
-        ]
       },
       showCnv: true,
       showWP: false,
@@ -377,20 +364,24 @@ export default {
   },
   mounted() {
     if (this.showCnv) {
+      this.runSketch();
+    }
+  },
+  methods: {
+    runSketch() {
       const script = function(p5) {
         let numOfPoints = 200;
         let spacing, initialPosX, initialPosY;
         let time = 0;
-        let time2 = 0;
 
         let posHistory = [];
-
         p5.setup = _ => {
-          let canvas = p5.createCanvas(1000, 700);
+          let canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight);
           canvas.parent("p5Canvas");
+          canvas.position(0, 0);
           canvas.style("border-radius", "25px");
-          initialPosX = 500;
-          initialPosY = 350;
+          initialPosX = 700;
+          initialPosY = p5.windowHeight / 2;
           spacing = 1.5;
         };
 
@@ -400,56 +391,56 @@ export default {
         };
 
         const savePoints = () => {
-          let phistory = [];
-          let mappedY = Math.floor(p5.map(p5.mouseY, 0, p5.height, 5, 100));
-          let mappedX = Math.floor(p5.map(p5.mouseX, 0, p5.width, 5, 30));
+          let allpoints = [];
+          let mappedY = Math.floor(p5.map(p5.mouseY, 0, p5.height, 5, 250));
+          let mappedX = Math.floor(p5.map(p5.mouseX, 0, p5.width, 5, 400));
 
           for (let i = 0; i < numOfPoints; i++) {
             let angle = (p5.TWO_PI * i) / numOfPoints;
-            let r = 250 + wave(i, mappedX, 10) + wave(i, mappedY, 3);
-            // let r2 = 150 + wave(i, mappedY, 3) + wave(i, mappedY, 7);
+            let r = 250 + wave(i, mappedX, 10) + wave(i, mappedX, 3);
+            let r2 = 150 + wave(i, mappedY, 3) + wave(i, mappedY, 7);
             let x = initialPosX + r * p5.cos(angle);
-            let y = initialPosY + r * p5.sin(angle);
+            let y = initialPosY + r2 * p5.sin(angle);
             let v = p5.createVector(x, y);
-            phistory.push(v);
+            allpoints.push(v);
           }
-          return phistory;
+          return allpoints;
         };
 
         const getPosHistory = () => {
           let p = savePoints();
           posHistory.push(p);
 
-          if (posHistory.length > 5) {
+          if (posHistory.length > 10) {
             posHistory.shift();
+          }
+
+          return posHistory;
+        };
+
+        const drawPoint = () => {
+          let p = getPosHistory();
+          for (let i = 0; i < p.length; i++) {
+            let pos = p[i];
+            for (let j = 1; j < pos.length; j++) {
+              p5.noFill();
+              p5.stroke(255);
+              p5.line(pos[j - 1].x, pos[j - 1].y, pos[j].x, pos[j].y);
+            }
           }
         };
 
         p5.draw = _ => {
-          getPosHistory();
-
-          for (let i = 0; i < posHistory.length; i++) {
-            let pos = posHistory[i]; // an array of 25 positions of the whole shape
-
-            for (let j = 0; j < pos.length; j++) {
-              //   p5.noStroke();
-              //   p5.fill(60, 50, 2);
-              p5.blendMode(p5.EXCLUSION);
-              p5.noFill();
-              p5.stroke(35, 23, 48);
-              p5.point(pos[j].x, pos[j].y);
-             
-            }
-          }
-          time = time + 0.05;
+          //  p5.background(0, 5);
+          p5.clear();
+          drawPoint();
+          time = time + 0.01;
         };
       };
 
       const P5 = require("p5");
       new P5(script);
-    }
-  },
-  methods: {
+    },
     closeProjects() {
       this.showCnv = false;
       this.showWP = false;
@@ -613,7 +604,7 @@ canvas {
 }
 
 .gradient {
-  height: 95%;
+  height: 97%;
   width: 75%;
   border-radius: 25px;
   box-shadow: inset 0 0 12px 15px rgba(114, 107, 107, 0.986),
@@ -625,7 +616,7 @@ canvas {
 }
 
 .container {
-  height: 95%;
+  height: 97%;
   border-radius: 25px;
 }
 
@@ -763,13 +754,13 @@ ul li span {
   height: 74%;
   border-radius: 25px;
   margin: auto;
-  box-shadow: 0px 7px 12px 10px rgba(0, 0, 0, 0.62);
 }
 
 video {
   width: 100%;
   height: auto;
   border-radius: 25px;
+  box-shadow: 0px 7px 12px 10px rgba(0, 0, 0, 0.62);
 }
 
 .introVid {
@@ -779,7 +770,7 @@ video {
   height: 74%;
   border-radius: 25px;
   margin: auto;
-  box-shadow: 0px 7px 12px 10px rgba(0, 0, 0, 0.62);
+  /* box-shadow: 0px 7px 12px 10px rgba(0, 0, 0, 0.62); */
 }
 
 .TS-introVid {
